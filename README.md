@@ -10,7 +10,7 @@ cd /Users/<path-to-where-wraith-will-be-installed>
 ```
 
 ```
-git clone git@gitlab.cabag.ch:cabag/wraith.git
+git clone https://github.com/cschnell/wraith.git
 ```
 
 ```
