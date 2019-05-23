@@ -1,0 +1,85 @@
+##############################################################
+##############################################################
+# This is an example configuration provided by Wraith.
+# Feel free to amend for your own requirements.
+# ---
+# This particular config is intended to demonstrate how
+# to use Wraith in 'capture' mode, which is best suited to
+# comparing a test and live version of the same website.
+#
+# `wraith capture capture.yaml`
+#
+##############################################################
+##############################################################
+
+# (required) The engine to run Wraith with. Examples: 'phantomjs', 'casperjs', 'slimerjs'
+# with chrome we can capture and process about 15 pages in one resolution per minute
+browser: "chrome"
+
+# (required) The domains to take screenshots of.
+domains:
+  current:  "http://www.example.com"
+  new:      "http://develop.example.com"
+
+# (required) The paths to capture. All paths should exist for both of the domains specified above.
+# paths:
+#  home:     /
+#  about:    /about
+#  contact:  /get-in-touch
+
+imports: "spider_paths.yaml"
+
+# A list of URLs to skip when spidering.
+# Ruby regular expressions can be used, if prefixed with `!ruby/regexp` as defined in the YAML Cookbook​.
+# See http://www.yaml.org/YAML_for_ruby.html#regexps
+spider_skips:
+#  - /foo/bar.html           # Matches /foo/bar.html explicitly
+#  - !ruby/regexp /^\/fr\// # Matches any URLs that start with /fr/
+#  - !ruby/regexp /\/blog\// # Matches any URLs that has /blog/
+  - !ruby/regexp /^\/fileadmin\// # Matches any URLs that start with /fileadmin
+  - !ruby/regexp /^\/typo3/ # Matches any URLs that start with /typo3
+
+# (required) Screen widths (and optional height) to resize the browser to before taking the screenshot.
+screen_widths:
+#  - 320
+  - 480
+#  - 600x768
+#  - 768
+  - 1024
+  - 1280
+
+# (optional) JavaScript file to execute before taking screenshot of every path. Default: nil
+#before_capture: 'javascript/disable_javascript--phantom.js'
+
+# (required) The directory that your screenshots will be stored in
+directory: 'shots/customer/domain'
+
+# (required) Amount of fuzz ImageMagick will use when comparing images. A higher fuzz makes the comparison less strict.
+fuzz: '20%'
+
+# (optional) The maximum acceptable level of difference (in %) between two images before Wraith reports a failure. Default: 0
+threshold: 5
+
+# (optional) Specify the template (and generated thumbnail sizes) for the gallery output.
+gallery:
+  template: 'basic_template' # Examples: 'basic_template' (default), 'slideshow_template'
+  thumb_width:  200
+  thumb_height: 200
+
+# (optional) Choose which results are displayed in the gallery, and in what order. Default: alphanumeric
+# Options:
+#   alphanumeric - all paths (with or without a difference) are shown, sorted by path
+#   diffs_first - all paths (with or without a difference) are shown, sorted by difference size (largest first)
+#   diffs_only - only paths with a difference are shown, sorted by difference size (largest first)
+# Note: different screen widths are always grouped together.
+mode: diffs_first
+
+# misc performance options
+# default: chrome reloads every size. if uncommented, chrome resizes the window the  
+# resize_or_reload: resize
+
+# default: 8. If uncommented, runs with 32 threads, might cause issues on slower machines
+# threads: 32
+
+# wait for x seconds in chrome for the page to settle. reduces possibility of "Page is being generated" warnings but slows the rendering
+# settle: 2

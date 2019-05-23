@@ -1,0 +1,73 @@
+##############################################################
+##############################################################
+# This is an example configuration provided by Wraith.
+# Feel free to amend for your own requirements.
+# ---
+# This particular config is intended to demonstrate how
+# to use Wraith in 'history' mode, which is best suited to
+# making sure your site's appearance remains consistent over
+# time.
+#
+# `wraith history history.yaml` # generate base screenshots
+# `wraith latest history.yaml`  # take new shots and compare
+#
+##############################################################
+##############################################################
+
+# (required) The engine to run Wraith with. Examples: 'phantomjs', 'casperjs', 'slimerjs'
+browser: "phantomjs"
+
+# (required) The domain to take screenshots of.
+domains:
+  base: "http://www.example.com"
+
+# (required) The paths to capture. This particular config is using casperjs, so we can take screenshots of selectors rather than the entire page.
+imports: "spider_paths.yaml"
+
+
+# (required) Screen widths (and optional height) to resize the browser to before taking the screenshot.
+screen_widths:
+#  - 320
+#  - 600x768
+#  - 768
+#  - 1024
+  - 1280
+
+# (optional) Resize to each screen width (efficient), or reload at each screen width (costly). Default: 'reload'
+resize_or_reload: 'resize'
+
+# (required for history mode, otherwise optional) The directory that your base screenshots will be stored in.
+history_dir: 'shots_base/customer/domain'
+
+# (required) The directory that your latest screenshots will be stored in
+directory: 'shots/customer/domain'
+
+# (required) Amount of fuzz ImageMagick will use when comparing images. A higher fuzz makes the comparison less strict.
+fuzz: '20%'
+
+# (optional) The maximum acceptable level of difference (in %) between two images before Wraith reports a failure. Default: 0
+threshold: 5
+
+# (optional) Specify the template (and generated thumbnail sizes) for the gallery output.
+gallery:
+  template: 'basic_template' # Examples: 'basic_template' (default), 'slideshow_template'
+  thumb_width:  200
+  thumb_height: 200
+
+# (optional) Choose which results are displayed in the gallery, and in what order. Default: alphanumeric
+# Options:
+#   alphanumeric - all paths (with or without a difference) are shown, sorted by path
+#   diffs_first - all paths (with or without a difference) are shown, sorted by difference size (largest first)
+#   diffs_only - only paths with a difference are shown, sorted by difference size (largest first)
+# Note: different screen widths are always grouped together.
+mode: diffs_first
+
+
+# (optional) Color to highlight the image diff. Default: 'blue'
+highlight_color: red
+
+# default: 8. If uncommented, runs with 32 threads, might cause issues on slower machines
+# threads: 32
+
+# wait for x seconds in chrome for the page to settle. reduces possibility of "Page is being generated" warnings but slows the rendering
+# settle: 2
