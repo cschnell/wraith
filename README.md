@@ -6,7 +6,7 @@ A responsive screenshot comparison tool
 Clone wraith
 
 ```
-cd /Users/<path-to-where-wraith-will-be-installed>
+cd /Users/[path-to-where-wraith-will-be-installed]
 ```
 
 ```
@@ -67,12 +67,12 @@ Edit configfiles or create new ones. There is a default example in the folder co
 
 Use a folder structure like this:
 
-`configs/<customer>/<domain>`
+`configs/[customer]/[domain]`
 
 ### Spider for URL-Crawling
 
 ```
-docker-wraith spider configs/<customer>/<domain>/capture.yaml
+docker-wraith spider configs/[customer]/[domain]/capture.yaml
 ```
 
 ### Capture Images in Compare Mode
@@ -80,7 +80,7 @@ docker-wraith spider configs/<customer>/<domain>/capture.yaml
 Run wraith with
 
 ```
-docker-wraith capture configs/<customer>/<domain>/capture.yaml
+docker-wraith capture configs/[customer]/[domain]/capture.yaml
 ```
 
 
@@ -89,28 +89,28 @@ docker-wraith capture configs/<customer>/<domain>/capture.yaml
 To capture the base to compare against
 
 ```
-docker-wraith history configs/<customer>/<domain>/history.yaml
+docker-wraith history configs/[customer]/[domain]/history.yaml
 ```
 
 To capture the current version and compare it against an existing base and create the gallery
 
 ```
-docker-wraith latest configs/<customer>/<domain>/history.yaml
+docker-wraith latest configs/[customer]/[domain]/history.yaml
 ```
 
 
 ## Interpretation of results
 Wraith stores the images and a gallery at 
-`/Users/<path-to-where-wrait-is-installed>/wraith/shots/<customer>/<domain>/`
+`/Users/[path-to-where-wrait-is-installed]/wraith/shots/[customer]/[domain]/`
 if configured properly.
 The gallery can be viewed in the browser with the url 
-`file:///Users//<path-to-where-wrait-is-installed>/wraith/shots/<customer>/<domain>/gallery.html`
+`file:///Users//[path-to-where-wrait-is-installed]/wraith/shots/[customer]/[domain]/gallery.html`
 
 ## Using Megapages or anchor links
 Unfortunately, Wraith spider and Chrome do not support anchor links like http://www.mysite.de/page.html#jumplink
 If your page features those you have to make some work-arounds:
 
-1. Spider as usually `docker-wraith spider configs/<customer>/<domain>/capture.yaml`
+1. Spider as usually `docker-wraith spider configs/[customer]/[domain]/capture.yaml`
 2. open your spider_paths.yaml
 3. in the first section (the path of the images on your disk) remove the % character
 4. in the second section (the paths of the page) change %23 to #
